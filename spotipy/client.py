@@ -399,6 +399,23 @@ class Spotify(object):
                          limit=limit, offset=offset, fields=fields,
                          market=market)
 
+    def playlist_tracks(self, playlist_id=None, fields=None,
+                             limit=100, offset=0, market=None):
+        """ Get full details of the tracks of a playlist.
+
+            Parameters:
+                - playlist_id - the id of the playlist
+                - fields - which fields to return
+                - limit - the maximum number of tracks to return
+                - offset - the index of the first track to return
+                - market - an ISO 3166-1 alpha-2 country code.
+        """
+        plid = self._get_id('playlist', playlist_id)
+        return self._get("playlists/%s/tracks" % (plid),
+                         limit=limit, offset=offset, fields=fields,
+                         market=market)
+
+
 
     def user_playlist_create(self, user, name, public=True, description=''):
         """ Creates a playlist for a user
